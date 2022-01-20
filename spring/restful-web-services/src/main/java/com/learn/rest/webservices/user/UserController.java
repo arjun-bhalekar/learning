@@ -72,6 +72,7 @@ public class UserController {
 		User savedUser = service.saveUser(user);
 
 		// return created User URI - /user/id
+		//e.g. HATEOAS - link generation in response
 		URI location = ServletUriComponentsBuilder
 									.fromCurrentRequest()
 									.path("/{id}")

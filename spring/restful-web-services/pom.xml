@@ -26,16 +26,39 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!-- Validation support for REST API input data provided -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
+		
+		<!-- HATEOAS - Hypermedia As The Engine Of Application State -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
-
+		
+		<!-- Internationalization ==> i18N -->
+		
+		
+		<!-- Content Negotiation - based on client header 'accept' values like xml or json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		
+		
+		<!-- Spring doc - OpenAPI v1.6.4 : https://springdoc.org/ -->
+		<!-- The Swagger UI page will then be available at http://server:port/context-path/swagger-ui.html -->
+		 <dependency>
+		      <groupId>org.springdoc</groupId>
+		      <artifactId>springdoc-openapi-ui</artifactId>
+		      <version>1.6.4</version>
+   		</dependency>
+		
+		
+		<!-- Spring dev tools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
