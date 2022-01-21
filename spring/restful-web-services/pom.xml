@@ -43,10 +43,10 @@
 		
 		
 		<!-- Content Negotiation - based on client header 'accept' values like xml or json -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		
 		<!-- Spring doc - OpenAPI v1.6.4 : https://springdoc.org/ -->
@@ -58,16 +58,16 @@
    		</dependency>
 		
 		<!-- Spring Actuator : Production ready features to Monitor your application -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		</dependency> -->
 		
-		
-		<dependency>
+		<!-- Spring security : for end points -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Spring dev tools -->
 		<dependency>
