@@ -23,10 +23,10 @@ public class UserDaoService {
 		users.add(new User(2, "Eve", new Date()));
 		users.add(new User(3, "Jack", new Date()));
 		
-		posts.add(new Post(10, "Going to Home Town", "After 3 years finally going...", 1));
-		posts.add(new Post(11, "Happy Birthday Jack", "Wish you happy birthday. Enjoy ur day.", 1));
-		posts.add(new Post(12, "Bad days", "As sufering from cold & cough", 2));
-		
+//		posts.add(new Post(10, "Going to Home Town", "After 3 years finally going...", 1));
+//		posts.add(new Post(11, "Happy Birthday Jack", "Wish you happy birthday. Enjoy ur day.", 1));
+//		posts.add(new Post(12, "Bad days", "As sufering from cold & cough", 2));
+//		
 		
 	}
 	
@@ -66,16 +66,16 @@ public class UserDaoService {
 		return null;
 	}
 	
-	public List<Post> findPosts(int userId) {
-
-		return posts.stream()
-				.filter(p -> p.getUserId() == userId)
-				.collect(Collectors.toList());
-	}
-	
-	public Post findPost(int postId) {
-		List<Post> postList =  posts.stream().filter(p -> p.getId()==postId).collect(Collectors.toList());
-		return postList.get(0);
-	}
+//	public List<Post> findPosts(int userId) {
+//
+//		return posts.stream()
+//				.filter(p -> p.getUserId() == userId)
+//				.collect(Collectors.toList());
+//	}
+//	
+//	public Post findPost(int postId) {
+//		List<Post> postList =  posts.stream().filter(p -> p.getId()==postId).collect(Collectors.toList());
+//		return postList.get(0);
+//	}
 
 }

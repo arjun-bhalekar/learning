@@ -2,7 +2,6 @@ package com.learn.rest.webservices.user;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -91,12 +90,14 @@ public class UserController {
 	
 	@GetMapping("/users/{id}/posts")
 	public List<Post> getAllPostForUser(@PathVariable int id){
-		return service.findPosts(id);
+		return null;
+		//return service.findPosts(id);
 	}
 	
 	@GetMapping("/users/{id}/posts/{post_id}")
 	public Post getPostForUser(@PathVariable int id, @PathVariable("post_id") int postId){
-		return service.findPosts(id).stream().filter(p -> p.getId()==postId).collect(Collectors.toList()).get(0);
+		return null;
+		//return service.findPosts(id).stream().filter(p -> p.getId()==postId).collect(Collectors.toList()).get(0);
 	}
 
 }

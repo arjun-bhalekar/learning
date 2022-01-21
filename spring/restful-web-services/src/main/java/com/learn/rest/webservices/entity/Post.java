@@ -1,24 +1,25 @@
 package com.learn.rest.webservices.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Post {
 	
+	@Id
+	@GeneratedValue
 	private Integer id;
-	
-	private String name;
 	
 	private String description;
 	
-	private Integer userId;
-	
-	
-
-	public Post(Integer id, String name, String description, Integer userId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.userId = userId;
-	}
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -26,14 +27,6 @@ public class Post {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDescription() {
@@ -44,12 +37,12 @@ public class Post {
 		this.description = description;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

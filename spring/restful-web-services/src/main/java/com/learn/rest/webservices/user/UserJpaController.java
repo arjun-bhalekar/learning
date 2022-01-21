@@ -3,8 +3,6 @@ package com.learn.rest.webservices.user;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.learn.rest.webservices.entity.Post;
 import com.learn.rest.webservices.entity.User;
+import com.learn.rest.webservices.exception.PostNotFoundException;
 import com.learn.rest.webservices.exception.UserNotFoundException;
 
 /**
@@ -46,11 +45,12 @@ import com.learn.rest.webservices.exception.UserNotFoundException;
 @RequestMapping("/jpa")
 public class UserJpaController {
 
-	@Autowired
-	private UserDaoService service;
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PostRepository postRepository;
 
 	@GetMapping("/users")
 	public List<User> retrieAllUsers() {
@@ -60,9 +60,9 @@ public class UserJpaController {
 	@GetMapping("/users/{id}")
 	public EntityModel<User> retrieveUser(@PathVariable int id) {
 		Optional<User> optional = userRepository.findById(id);
-		if (!optional.isPresent())
+		if (!optional.isPresent()) {
 			throw new UserNotFoundException("User not found with id-" + id);
-		
+		}
 		EntityModel<User> entityModel = EntityModel.of(optional.get());
 		
 		//now build /users link and add it to entityModel
@@ -93,14 +93,55 @@ public class UserJpaController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	
 	@GetMapping("/users/{id}/posts")
-	public List<Post> getAllPostForUser(@PathVariable int id){
-		return service.findPosts(id);
+	public List<Post> getAllPostForUser(@PathVariable int id) {
+
+		Optional<User> optional = userRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new UserNotFoundException("User not found with id-" + id);
+		}
+		return optional.get().getPosts();
+
+	}
+	
+	@PostMapping("/users/{id}/posts")
+	public ResponseEntity<Object> createPost(@PathVariable int id,@Valid @RequestBody Post post) {
+		Optional<User> optional = userRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new UserNotFoundException("User not found with id-" + id);
+		}
+		
+		User user = optional.get();
+		post.setUser(user);
+		postRepository.save(post);
+		
+		// return created User URI - /user/id
+		//e.g. HATEOAS - link generation in response
+		URI location = ServletUriComponentsBuilder
+									.fromCurrentRequest()
+									.path("/{id}")
+									.buildAndExpand(post.getId())	.toUri();
+
+		return ResponseEntity.created(location).build();
 	}
 	
 	@GetMapping("/users/{id}/posts/{post_id}")
-	public Post getPostForUser(@PathVariable int id, @PathVariable("post_id") int postId){
-		return service.findPosts(id).stream().filter(p -> p.getId()==postId).collect(Collectors.toList()).get(0);
+	public EntityModel<Post> retrieveSinglePost(@PathVariable int id, @PathVariable int post_id) {
+		Optional<User> optional = userRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new UserNotFoundException("User not found with id-" + id);
+		}
+		
+		Optional<Post> optionalPost = postRepository.findById(post_id);
+		if (!optionalPost.isPresent()) {
+			throw new PostNotFoundException("Post not found with post id-" + post_id);
+		}
+		
+		EntityModel<Post> entityModel = EntityModel.of(optionalPost.get());
+		
+		WebMvcLinkBuilder postLinkBuilder = linkTo(methodOn(this.getClass()).getAllPostForUser(id)); 
+		entityModel.add(postLinkBuilder.withRel("all-posts"));
+		return entityModel;
 	}
-
 }
