@@ -1,0 +1,26 @@
+
+Sequence of Classes - 
+
+1. ThreadTest.java - Basics of Thread
+
+2. Task.java - new Sample Thread i.e. Task
+
+3. ExecutorServiceTest.java - how to Execute multiple threads. -  
+   							  Executors.newSingleThreadExecutor(),
+   							  Executors.newFixedThreadPool(5), 
+   							  execute(Runnable command)
+
+4. CallableTask.java - new Callable Task with return result
+
+5. CallableServiceTest.java - Submitting CallableTask using ExecutorService & getting its result upon task completion
+						    - Future<String> result =  submit(new CallableTask("arjun"));
+
+6. MultipleCallableServiceTest - Submitting Multiple CallableTask using ExeutorService & 
+				
+				List<CallableTask> taskList = List.of(new CallableTask("Arjun"), new CallableTask("Ranga"), new CallableTask("Atharva"));
+				List<Future<String>> taskResults = executorService.invokeAll(taskList);
+				
+				for (Future<String> future : taskResults) {
+					System.out.println(future.get());
+				}
+
