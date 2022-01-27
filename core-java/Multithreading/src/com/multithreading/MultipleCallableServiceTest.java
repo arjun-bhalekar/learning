@@ -1,5 +1,6 @@
-package com.learn.multithreading;
+package com.multithreading;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,8 +25,17 @@ public class MultipleCallableServiceTest {
 
 		// --- Submit multiple task at a time
 
-		List<CallableTask> taskList = List.of(new CallableTask("Arjun"), new CallableTask("Ranga"),
-				new CallableTask("Atharva"), new CallableTask("Rama"));
+//		List<CallableTask> taskList = List.of(new CallableTask("Arjun"), new CallableTask("Ranga"),
+//				new CallableTask("Atharva"), new CallableTask("Rama"));
+		
+		List<CallableTask> taskList = new ArrayList<CallableTask>();
+		taskList.add(new CallableTask("Arjun"));
+		taskList.add(new CallableTask("Ranga"));
+		taskList.add(new CallableTask("Atharva"));
+		taskList.add(new CallableTask("Rama"));
+		
+		
+		
 		List<Future<String>> taskResults = executorService.invokeAll(taskList);
 
 		for (Future<String> future : taskResults) {

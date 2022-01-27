@@ -1,4 +1,4 @@
-package com.learn.multithreading;
+package com.multithreading;
 public class Task extends Thread{
 		
 		private int taskNum;
