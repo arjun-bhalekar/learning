@@ -11,7 +11,11 @@ public class MyTable {
 		}
 
 	}
-
+	
+	/**
+	 * Method without Synchronization
+	 * @param n
+	 */
 	synchronized void printTableThreadSafeV1(int n) {
 		System.out.println("Printing table of : " + n);
 		for (int i = 1; i <= 10; i++) {
@@ -25,7 +29,11 @@ public class MyTable {
 		}
 
 	}
-
+	
+	/**
+	 * Synchronized block
+	 * @param n
+	 */
 	void printTableThreadSafeV2(int n) {
 		System.out.println("Printing table of : " + n);
 		synchronized (this) {
@@ -41,5 +49,23 @@ public class MyTable {
 		}
 
 	}
+	
+	/**
+	 * Synchronized static method
+	 * @param n
+	 */
+	synchronized static void printTableThreadSafeV3(int n) {
+		System.out.println("Printing table of : " + n);
+		for (int i = 1; i <= 10; i++) {
+
+			System.out.println(n * i);
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 
 }
