@@ -21,10 +21,10 @@ function LoginComponent() {
         setPassword(event.target.value)
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         //console.log(username +"---"+password);
 
-        if (authContext.login(username, password)) {
+        if (await authContext.login(username, password)) {
             //navigate('/welcome/'+username) //this also works
             navigate(`/welcome/${username}`) //using tick
         } else {
