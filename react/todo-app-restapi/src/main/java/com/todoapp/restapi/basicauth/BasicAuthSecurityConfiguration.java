@@ -8,7 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+//Note : Committed below BasicAuthConfig as JWT Config is now active
+//@Configuration
 public class BasicAuthSecurityConfiguration {
 
     @Bean
